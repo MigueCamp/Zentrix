@@ -1,0 +1,22 @@
+# Perfil STAGING — espejo de producción, datos sintéticos (docs/06 §1).
+# Solo referencia variables de entorno: ningún secreto embebido (docs/06 §4).
+spring:
+  datasource:
+    # encrypt=true + trustServerCertificate=false: exige TLS real hacia SQL Server.
+    url: jdbc:sqlserver://${DB_HOST}:${DB_PORT:1433};databaseName=${DB_NAME};encrypt=true;trustServerCertificate=false
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    properties:
+      hibernate:
+        format_sql: false
+  flyway:
+    # En staging las migraciones corren automáticamente al arrancar (docs/06 §5).
+    enabled: true
+
+# Logs estructurados en JSON para el stack de logging del ambiente (docs/06 §6).
+logging:
+  structured:
+    format:
+      console: ecs

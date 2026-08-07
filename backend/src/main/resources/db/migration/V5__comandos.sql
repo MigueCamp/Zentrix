@@ -1,0 +1,13 @@
+CREATE TABLE COMANDO (
+    ComandoId          BIGINT IDENTITY(1,1) PRIMARY KEY,
+    DispositivoId       INT NOT NULL,
+    Tipo                  NVARCHAR(30) NOT NULL,
+    PayloadJson           NVARCHAR(MAX) NULL,
+    Estado                NVARCHAR(20) NOT NULL DEFAULT 'PENDIENTE',
+    DetalleResultado       NVARCHAR(500) NULL,
+    FechaCreacion            DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    FechaActualizacion        DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    CONSTRAINT FK_COMANDO_DISPOSITIVO FOREIGN KEY (DispositivoId) REFERENCES DISPOSITIVO (DispositivoId)
+);
+
+CREATE INDEX IX_COMANDO_DISPOSITIVO_ESTADO ON COMANDO (DispositivoId, Estado);

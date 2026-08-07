@@ -1,0 +1,20 @@
+# Perfil de PRUEBAS DE INTEGRACIÓN (@ActiveProfiles("test")).
+# El datasource lo inyecta AbstractIntegrationTest (@DynamicPropertySource):
+# Testcontainers en CI, o un SQL Server existente vía -Dit.datasource.url en local.
+# Aquí solo van los valores no sensibles necesarios para arrancar el contexto.
+spring:
+  flyway:
+    enabled: true
+zentrix:
+  cors:
+    allowed-origins: http://localhost:3000
+  jwt:
+    secret: integration-test-secret-0123456789abcdef0123456789abcdef
+  security:
+    encryption-key: 5wYYAh1IGo8WzWpCyjxwWM5/LmMsR7FFF328IRYYwJI=
+  storage:
+    apk-dir: ./target/test-apks
+  bootstrap:
+    # Super admin creado al arrancar el contexto; los tests inician sesión con estas credenciales.
+    admin-email: it-admin@zentrix.local
+    admin-password: It_Admin_2026!

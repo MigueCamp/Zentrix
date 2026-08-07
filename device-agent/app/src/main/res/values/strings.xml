@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Zentrix Agent</string>
+    <string name="enrollment_title">Zentrix Agent</string>
+    <string name="enrollment_pending">Dispositivo aún no inscrito</string>
+    <string name="enrollment_token_hint">Token de enrollment</string>
+    <string name="enrollment_imei_hint">IMEI</string>
+    <string name="enrollment_submit">Inscribir dispositivo</string>
+    <string name="enrollment_missing_fields">Completa el token y el IMEI</string>
+    <string name="enrollment_failed">No se pudo inscribir el dispositivo. Verifica el token e intenta de nuevo.</string>
+    <string name="enrollment_done">Dispositivo inscrito. Reportando estado periódicamente.</string>
+</resources>

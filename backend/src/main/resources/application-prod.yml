@@ -1,0 +1,24 @@
+# Perfil PRODUCCIÓN — datos reales, acceso restringido (docs/06 §1).
+# Solo referencia variables de entorno: ningún secreto embebido (docs/06 §4).
+spring:
+  datasource:
+    # encrypt=true + trustServerCertificate=false: exige TLS real hacia SQL Server.
+    url: jdbc:sqlserver://${DB_HOST}:${DB_PORT:1433};databaseName=${DB_NAME};encrypt=true;trustServerCertificate=false
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    properties:
+      hibernate:
+        format_sql: false
+  flyway:
+    # En producción las migraciones NO corren al arrancar el contenedor: son un paso
+    # explícito y revisado del pipeline (docs/06 §5). El esquema ya debe estar migrado
+    # antes de desplegar esta imagen; ddl-auto=validate (base) verifica que coincida.
+    enabled: false
+
+# Logs estructurados en JSON para el stack de logging del ambiente (docs/06 §6).
+logging:
+  structured:
+    format:
+      console: ecs

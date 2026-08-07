@@ -1,0 +1,12 @@
+CREATE TABLE ALERTA (
+    AlertaId      INT IDENTITY(1,1) PRIMARY KEY,
+    DispositivoId  INT NOT NULL,
+    Tipo            NVARCHAR(30) NOT NULL,
+    Severidad        NVARCHAR(20) NOT NULL,
+    Mensaje           NVARCHAR(500) NOT NULL,
+    Atendida           BIT NOT NULL DEFAULT 0,
+    FechaCreacion         DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    CONSTRAINT FK_ALERTA_DISPOSITIVO FOREIGN KEY (DispositivoId) REFERENCES DISPOSITIVO (DispositivoId)
+);
+
+CREATE INDEX IX_ALERTA_DISPOSITIVO_ATENDIDA ON ALERTA (DispositivoId, Atendida);
